@@ -1,19 +1,11 @@
-var grsuLoader = require("./GrsuLoader");
+var server = require("./server");
+var router = require("./router");
+var requestHandlers = require("./requestHandlers");
 
-var GrsuLoader = new grsuLoader.GrsuLoader();
+var handle = {}
+handle["/getFaculties"] = requestHandlers.loadFaculties;
+handle["/departments"] = requestHandlers.loadDepartments;
+handle["/getGroupSchedule"] = requestHandlers.loadGroupSchedule;
+handle["/getGroups"] = requestHandlers.loadGroups;
 
-/*GrsuLoader.LoadGroupSchedule(945, function (params) {
-    console.log(params);
-});*/
-
-/*GrsuLoader.LoadDepartments(function (params) {
-    console.log(params);
-});*/
-
-/*GrsuLoader.LoadFaculties(function (params) {
-    console.log(params);
-});*/
-
-/*GrsuLoader.LoadGroups(2,3,3,function (params) {
-    console.log(params);
-});*/
+server.start(router.route, handle);
