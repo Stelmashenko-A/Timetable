@@ -7,57 +7,39 @@ function GrsuLoader(params) {
     this.getFaculties = "/1.x/app2/getFaculties";
     this.getGroups = "/1.x/app2/getGroups";//?departmentId=2&facultyId=3&course=3    
 };
-
-GrsuLoader.prototype.LoadGroupSchedule = function (group, callback) {
+GrsuLoader.prototype.Load = function (path, callback) {
+    var body = [];
     http.get({
         hostname: this.host,
-        path: this.groupSchedule + '?groupId=' + group,
+        path: path,
         agent: false
     }, (res) => {
         res.on('data', function (chunk) {
-            var decoder = new StringDecoder('utf8');
-            callback(decoder.write(chunk));
-        });
+            body.push(chunk);
+        }).on('end', function () {
+            callback(body.toString());
+        }
+            );
     });
-};
+}
+GrsuLoader.prototype.LoadGroupSchedule = function (group, callback) {
+    var path = this.groupSchedule + '?groupId=' + group;
+    this.Load(path, callback);
+}
 
 GrsuLoader.prototype.LoadDepartments = function (callback) {
-    http.get({
-        hostname: this.host,
-        path: this.getDepartments,
-        agent: false
-    }, (res) => {
-        res.on('data', function (chunk) {
-            var decoder = new StringDecoder('utf8');
-            callback(decoder.write(chunk));
-        });
-    });
+    var path = this.getDepartments;
+    this.Load(path, callback);
 };
 
 GrsuLoader.prototype.LoadFaculties = function (callback) {
-    http.get({
-        hostname: this.host,
-        path: this.getFaculties,
-        agent: false
-    }, (res) => {
-        res.on('data', function (chunk) {
-            var decoder = new StringDecoder('utf8');
-            callback(decoder.write(chunk));
-        });
-    });
+    var path = this.getFaculties;
+    this.Load(path, callback);
 };
 
 GrsuLoader.prototype.LoadGroups = function (departmentId, facultyId, course, callback) {
-    http.get({
-        hostname: this.host,
-        path: this.getGroups + "?departmentId=" + departmentId + "&facultyId=" + facultyId + "&course=" + course,
-        agent: false
-    }, (res) => {
-        res.on('data', function (chunk) {
-            var decoder = new StringDecoder('utf8');
-            callback(decoder.write(chunk));
-        });
-    });
+    var path = this.getGroups + "?departmentId=" + departmentId + "&facultyId=" + facultyId + "&course=" + course;
+    this.Load(path, callback);
 }
 
 exports.GrsuLoader = GrsuLoader;
