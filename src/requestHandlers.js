@@ -22,7 +22,7 @@ function loadGroupSchedule(req, res) {
     });
 }
 
-function loadGroups(urlParsed, res) {
+function loadGroups(req, res) {
 	var urlParsed = url.parse(req.url, true);
   	GrsuLoader.LoadGroups(urlParsed.query.departmentId, urlParsed.query.facultyId, urlParsed.query.course, function (params) {
         res.end(params);
