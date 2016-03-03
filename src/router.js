@@ -1,13 +1,31 @@
-var url = require("url");
+var express = require('express');
+var grsuLoader = require("./GrsuLoader");
 
-function route(handle, req, res) {
-    var urlParsed = url.parse(req.url, true);
-    if (typeof handle[urlParsed.pathname] === 'function') {
-        handle[urlParsed.pathname](req, res);
-    } else {
-        res.statusCode = 404;
-        res.end("Page not found");
-    }
-}
+var router = express.Router();
+var GrsuLoader = new grsuLoader.GrsuLoader();
 
-exports.route = route;
+router.get('/getFaculties', function (req, res) {
+	GrsuLoader.LoadFaculties(function (params) {
+		res.json(JSON.parse(params));
+    });
+});
+
+router.get('/getDepartments', function (req, res) {
+	GrsuLoader.LoadDepartments(function (params) {
+		res.json(JSON.parse(params));
+    });
+});
+
+router.get('/getGroupSchedule', function (req, res) {
+	GrsuLoader.LoadGroupSchedule(req.query.groupId, function (params) {
+        res.json(JSON.parse(params));
+    });
+});
+
+router.get('/getGroups', function (req, res) {
+	GrsuLoader.LoadGroups(req.query.departmentId, req.query.facultyId, req.query.course, function (params) {
+        res.json(JSON.parse(params));
+    });
+});
+
+module.exports = router;

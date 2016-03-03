@@ -1,11 +1,8 @@
-var server = require("./server");
-var router = require("./router");
-var requestHandlers = require("./requestHandlers");
+var express = require('express');
+var router = require('./router');
 
-var handle = {}
-handle["/getFaculties"] = requestHandlers.loadFaculties;
-handle["/departments"] = requestHandlers.loadDepartments;
-handle["/getGroupSchedule"] = requestHandlers.loadGroupSchedule;
-handle["/getGroups"] = requestHandlers.loadGroups;
+var app = express();
 
-server.start(router.route, handle);
+app.use('/', router)
+
+app.listen(8888);
