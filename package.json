@@ -12,8 +12,12 @@
     "url": "git+https://github.com/Stelmashenko-A/Timetable.git"
   },
   "author": [
-  {"name": "Stelmashenko A"}, 
-  {"name": "Chirich K."}
+    {
+      "name": "Stelmashenko A"
+    },
+    {
+      "name": "Chirich K."
+    }
   ],
   "license": "ISC",
   "bugs": {
