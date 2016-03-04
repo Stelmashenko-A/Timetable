@@ -1,6 +1,6 @@
 {
 	"preset": "yandex",
-	"validateQuoteMarks": true,
+	"validateQuoteMarks": false,
 	"validateIndentation": null,
 	"requireSemicolons": true,
 	"requireSpaceAfterLineComment": true,
