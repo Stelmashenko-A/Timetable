@@ -34,7 +34,7 @@
             "name": "Test",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/tests/app-test.js",
+            "program": "${workspaceRoot}/test/test-app.js",
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",

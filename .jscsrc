@@ -1,0 +1,9 @@
+{
+	"preset": "yandex",
+	"validateQuoteMarks": false,
+	"validateIndentation": null,
+	"requireSemicolons": true,
+	"requireSpaceAfterLineComment": true,
+	"requireLineFeedAtFileEnd": true,
+	"disallowTrailingWhitespace": false
+}
