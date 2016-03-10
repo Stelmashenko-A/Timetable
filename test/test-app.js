@@ -3,26 +3,50 @@ var request = require('supertest');
 
 request = request('http://localhost:8888');
 
-var logError = function (testedRoute, err) {
+/*var logError = function (testedRoute, err) {
     if (err != null){
         console.log(testedRoute + ' ' + err);
         return;
     }
     console.log(testedRoute + ' work');
-};
+};*/
 
-request.get('/getFaculties').expect(200, function (err) {
-  logError('/getFaculties', err);
+describe('GET /faculties', function(){
+  it('respond with json', function(done){
+    request
+    .get('/faculties')
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect(200, done);
+  });
 });
 
-request.get('/getDepartments').expect(200, function (err) {
-  logError('/getDepartments', err);
+describe('GET /departments', function(){
+  it('respond with json', function(done){
+    request
+    .get('/departments')
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect(200, done);
+  });
 });
 
-request.get('/getGroups?departmentId=2&facultyId=3&course=3').expect(200, function (err) {
-  logError('/getGroups?departmentId=2&facultyId=3&course=3', err);
+describe('GET /groupSchedule', function(){
+  it('respond with json', function(done){
+    request
+    .get('/groupSchedule')
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect(200, done);
+  });
 });
 
-request.get('/getGroupSchedule?groupId=945').expect(200, function (err) {
-  logError('/getGroupSchedule?groupId=945', err);
+describe('GET /groups', function(){
+  it('respond with json', function(done){
+    request
+    .get('/groups')
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect(200, done);
+  });
 });

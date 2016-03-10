@@ -4,26 +4,26 @@ var grsuLoader = require('./GrsuLoader');
 var router = express.Router();
 var GrsuLoader = new grsuLoader.GrsuLoader();
 
-router.get('/getFaculties', function (req, res) {
-    GrsuLoader.LoadFaculties(function (params) {
+router.get('/faculties', function (req, res) {
+    GrsuLoader.loadFaculties(function (params) {
         res.json(JSON.parse(params));
     });
 });
 
-router.get('/getDepartments', function (req, res) {
-  GrsuLoader.LoadDepartments(function (params) {
+router.get('/departments', function (req, res) {
+  GrsuLoader.loadDepartments(function (params) {
         res.json(JSON.parse(params));
     });
 });
 
-router.get('/getGroupSchedule', function (req, res) {
-    GrsuLoader.LoadGroupSchedule(req.query.groupId, function (params) {
+router.get('/groupSchedule', function (req, res) {
+    GrsuLoader.loadGroupschedule(req.query.groupId, function (params) {
         res.json(JSON.parse(params));
     });
 });
 
-router.get('/getGroups', function (req, res) {
-    GrsuLoader.LoadGroups(req.query.departmentId, req.query.facultyId, req.query.course, function (params) {
+router.get('/groups', function (req, res) {
+    GrsuLoader.loadGroups(req.query.departmentId, req.query.facultyId, req.query.course, function (params) {
         res.json(JSON.parse(params));
     });
 });
