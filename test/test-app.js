@@ -11,8 +11,8 @@ request = request('http://localhost:8888');
     console.log(testedRoute + ' work');
 };*/
 
-describe('GET /faculties', function(){
-  it('respond with json', function(done){
+describe('GET /faculties', function () {
+  it('respond with json', function (done) {
     request
     .get('/faculties')
     .set('Accept', 'application/json')
@@ -21,8 +21,8 @@ describe('GET /faculties', function(){
   });
 });
 
-describe('GET /departments', function(){
-  it('respond with json', function(done){
+describe('GET /departments', function () {
+  it('respond with json', function (done) {
     request
     .get('/departments')
     .set('Accept', 'application/json')
@@ -31,8 +31,8 @@ describe('GET /departments', function(){
   });
 });
 
-describe('GET /groupSchedule', function(){
-  it('respond with json', function(done){
+describe('GET /groupSchedule', function () {
+  it('respond with json', function (done) {
     request
     .get('/groupSchedule')
     .set('Accept', 'application/json')
@@ -41,8 +41,8 @@ describe('GET /groupSchedule', function(){
   });
 });
 
-describe('GET /groups', function(){
-  it('respond with json', function(done){
+describe('GET /groups', function () {
+  it('respond with json', function (done) {
     request
     .get('/groups')
     .set('Accept', 'application/json')
