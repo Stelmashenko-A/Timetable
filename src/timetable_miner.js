@@ -11,9 +11,9 @@ function TimetableMiner(params) {
 
 TimetableMiner.prototype.loadAllTimetable = function () {
     GrsuLoader.loadDepartments(function (departments) {
-        this.departments = JSON.parse(departments).items;
+        this.departments = departments.items;
         GrsuLoader.loadFaculties(function (faculties) {
-            this.faculties = JSON.parse(faculties).items;
+            this.faculties = faculties.items;
             console.log(this.faculties);
             this.departments.forEach(function (department) {
                 this.faculties.forEach(function (faculty) {

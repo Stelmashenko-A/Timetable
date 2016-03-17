@@ -3,14 +3,12 @@ var router = require('./router');
 var mongoose = require('mongoose');
 // var tt = require('./timetable_miner');
 // var TimetableMiner = new tt.TimetableMiner();
-// TimetableMiner.loadAllTimetable(); 
-
-var router = express.Router();
+// TimetableMiner.loadAllTimetable();
 
 var app = express();
 app.use('/', router);
 
-app.listen(8888); 
+app.listen(8888);
 
 mongoose.connect('mongodb://localhost/test');
 var db = mongoose.connection;
