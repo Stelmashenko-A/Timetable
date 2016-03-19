@@ -4,11 +4,11 @@ var mongoose = require('mongoose');
 // var tt = require('./timetable_miner');
 // var TimetableMiner = new tt.TimetableMiner();
 // TimetableMiner.loadAllTimetable();
-
+var config = require('../config');
 var app = express();
 app.use('/', router);
 
-app.listen(8888);
+app.listen(config.get('port'));
 
 mongoose.connect('mongodb://localhost/test');
 var db = mongoose.connection;
