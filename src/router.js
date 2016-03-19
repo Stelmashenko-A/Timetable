@@ -11,7 +11,7 @@ router.get('/faculties', function (req, res) {
 });
 
 router.get('/departments', function (req, res) {
-  GrsuLoader.loadDepartments(function (params) {
+    GrsuLoader.loadDepartments(function (params) {
         res.json(params);
     });
 });

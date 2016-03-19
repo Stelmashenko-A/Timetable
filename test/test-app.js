@@ -12,41 +12,41 @@ request = request('http://localhost:8888');
 };*/
 
 describe('GET /faculties', function () {
-  it('respond with json', function (done) {
-    request
-    .get('/faculties')
-    .set('Accept', 'application/json')
-    .expect('Content-Type', /json/)
-    .expect(200, done);
-  });
+    it('respond with json', function (done) {
+        request
+        .get('/faculties')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done);
+    });
 });
 
 describe('GET /departments', function () {
-  it('respond with json', function (done) {
-    request
-    .get('/departments')
-    .set('Accept', 'application/json')
-    .expect('Content-Type', /json/)
-    .expect(200, done);
-  });
+    it('respond with json', function (done) {
+        request
+        .get('/departments')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done);
+    });
 });
 
 describe('GET /groupSchedule', function () {
-  it('respond with json', function (done) {
-    request
-    .get('/groupSchedule')
-    .set('Accept', 'application/json')
-    .expect('Content-Type', /json/)
-    .expect(200, done);
-  });
+    it('respond with json', function (done) {
+        request
+        .get('/groupSchedule')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done);
+    });
 });
 
 describe('GET /groups', function () {
-  it('respond with json', function (done) {
-    request
-    .get('/groups')
-    .set('Accept', 'application/json')
-    .expect('Content-Type', /json/)
-    .expect(200, done);
-  });
+    it('respond with json', function (done) {
+        request
+        .get('/groups')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done);
+    });
 });
