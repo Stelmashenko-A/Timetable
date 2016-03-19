@@ -24,7 +24,6 @@
       if (xhr.status != 200) {
         alert( xhr.status + ': ' + xhr.statusText );
       } else {
-        document.getElementById('timetable').appendChild(buildHtmlTable(JSON.parse(xhr.response).days));
         function buildHtmlTable(arr) {
           var tbody = document.createElement('tbody');
           for (var i = 0; i < arr.length; i++) {
@@ -53,6 +52,7 @@
          }
          return tbody;
        }
+       document.getElementById('timetable').appendChild(buildHtmlTable(JSON.parse(xhr.response).days));
      }
    }
    </script>
