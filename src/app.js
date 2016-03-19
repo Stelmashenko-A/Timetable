@@ -9,6 +9,7 @@ TimetableMiner.loadAllTimetable(function () {
 var config = require('../config');
 var app = express();
 app.use('/', router);
+app.use(express.static(__dirname + '/public'));
 
 app.listen(config.get('port'));
 
