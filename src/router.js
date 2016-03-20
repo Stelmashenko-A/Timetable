@@ -4,6 +4,10 @@ var grsuLoader = require('./GrsuLoader');
 var router = express.Router();
 var GrsuLoader = new grsuLoader.GrsuLoader();
 
+router.get('/', function(req, res) {
+  res.redirect('/index.html');
+});
+
 router.get('/faculties', function (req, res) {
     GrsuLoader.loadFaculties(function (params) {
         res.json(params);
@@ -11,7 +15,7 @@ router.get('/faculties', function (req, res) {
 });
 
 router.get('/departments', function (req, res) {
-  GrsuLoader.loadDepartments(function (params) {
+    GrsuLoader.loadDepartments(function (params) {
         res.json(params);
     });
 });
