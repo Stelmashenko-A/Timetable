@@ -1,11 +1,16 @@
 var express = require('express');
 var router = require('./router');
 var mongoose = require('mongoose');
+var schedule = require('node-schedule');
 var tt = require('./timetable_miner');
 var TimetableMiner = new tt.TimetableMiner();
-TimetableMiner.loadAllTimetable(function () {
-    console.log('qwerty');
+
+var j = schedule.scheduleJob('0 0 20 2,8 *', function(){
+  TimetableMiner.loadAllTimetable(function () {
+      console.log('qwerty');
+  });
 });
+
 var config = require('../config');
 var app = express();
 app.use('/', router);
