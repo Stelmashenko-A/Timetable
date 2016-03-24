@@ -36,18 +36,16 @@ function initUniversitySructure(timetable,callback) {
 }
 
 function initGroups(timetable,callback) {
-    timetable.departments.forEach(function (department) {
-        timetable.faculties.forEach(function (faculty) {
-            timetable.courses.forEach(function (course) {
+    async.each(timetable.departments, function (department, callback) {
+        async.each(timetable.faculties, function (faculty, callback) {
+            async.each(timetable.courses, function (course, callback) {
                 GrsuLoader.loadGroups(department.id, faculty.id, course, function (groups) {
                     console.log(groups.items);
+                    callback();
                 });
-            });
-        });
-    });
-    // callback call early
-    // not forget to fix
-    callback();
+            }, callback);
+        }, callback);
+    }, callback);
 }
 
 TimetableMiner.prototype.loadAllTimetable = function (callback) {

@@ -5,12 +5,14 @@ var schedule = require('node-schedule');
 var tt = require('./timetable_miner');
 var TimetableMiner = new tt.TimetableMiner();
 
-var j = schedule.scheduleJob('0 0 20 2,8 *', function(){
-  TimetableMiner.loadAllTimetable(function () {
+var j = schedule.scheduleJob('0 0 20 2,8 *', function () {
+    TimetableMiner.loadAllTimetable(function () {
       console.log('qwerty');
   });
 });
-
+TimetableMiner.loadAllTimetable(function () {
+      console.log('qwerty');
+  });
 var config = require('../config');
 var app = express();
 app.use('/', router);
