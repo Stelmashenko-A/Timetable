@@ -6,6 +6,7 @@ function GrsuLoader(params) {
     this.getDepartments = '/1.x/app1/getDepartments';
     this.getFaculties = '/1.x/app1/getFaculties';
     this.getGroups = '/1.x/app1/getGroups';// ?departmentId=2&facultyId=3&course=3
+    //http://api.grsu.by/1.x/app1/getGroupSchedule?groupId=945&dateStart=24.03.2016&dateEnd=24.04.2016
 };
 GrsuLoader.prototype.Load = function (path, callback) {
     var body = [];

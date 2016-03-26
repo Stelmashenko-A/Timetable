@@ -1,3 +1,13 @@
 {
-   "port": 8888
+   "port": 8888,
+   "mongoose": {
+       "uri": "mongodb://localhost/Test",
+       "options": {
+           "server": {
+               "socketOptions": {
+                   "keepAlive": 1
+               }
+           }
+       }
+   }
 }

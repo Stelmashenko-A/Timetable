@@ -4,8 +4,8 @@ var grsuLoader = require('./GrsuLoader');
 var router = express.Router();
 var GrsuLoader = new grsuLoader.GrsuLoader();
 
-router.get('/', function(req, res) {
-  res.redirect('/index.html');
+router.get('/', function (req, res) {
+    res.redirect('/index.html');
 });
 
 router.get('/faculties', function (req, res) {
