@@ -12,8 +12,8 @@ var Day = require('./models/day-schedule').DayScheduleSchema;
         console.log('qwerty');
     });
 });*/
-TimetableMiner.loadAllTimetable(function () {
-    console.log('qwerty');
+TimetableMiner.loadAllTimetable(function (timetable) {
+    console.log("qwe");
 });
 var config = require('../config');
 var app = express();
