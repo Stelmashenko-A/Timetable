@@ -1,5 +1,6 @@
-var Day = require('./day').Day;
-
+var Day = require('./day-schedule').Day;
+//statics methods
+//index
 function buildDay(group, day) {
     var storedDay = new Day();
     storedDay.date = day.date;

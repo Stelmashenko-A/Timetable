@@ -5,7 +5,7 @@ var schedule = require('node-schedule');
 var tt = require('./timetable_miner');
 var TimetableMiner = new tt.TimetableMiner();
 var builder = require('./models/day-builder');
-var Day = require('./models/day').Day;
+var Day = require('./models/day-schedule').DayScheduleSchema;
 
 /*var j = schedule.scheduleJob('0 0 20 2,8 *', function () {
     TimetableMiner.loadAllTimetable(function () {
@@ -31,8 +31,8 @@ db.once('open', function () {
 var grsuLoader = require('./GrsuLoader');
 var GrsuLoader = new grsuLoader.GrsuLoader();
 GrsuLoader.loadGroupschedule(945, function (timetable) {
-    var d = builder.buildDay(945, timetable.days[0]);
-    Day.findOne({group: '945'}, function (err, day) {
+    var d = Day.buildDayScheduleSchema(949, timetable.days[0]);
+    Day.findOne({group: '949'}, function (err, day) {
         console.log(day);
     });
     d.save(function (err, user, affected) {
