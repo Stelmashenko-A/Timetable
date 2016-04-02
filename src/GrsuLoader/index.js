@@ -2,10 +2,11 @@ var http = require('http');
 var StringDecoder = require('string_decoder').StringDecoder;
 function GrsuLoader(params) {
     this.host = 'api.grsu.by';
-    this.groupSchedule = '/1.x/app2/getGroupSchedule';// ?groupId=945
-    this.getDepartments = '/1.x/app2/getDepartments';
-    this.getFaculties = '/1.x/app2/getFaculties';
-    this.getGroups = '/1.x/app2/getGroups';// ?departmentId=2&facultyId=3&course=3
+    this.groupSchedule = '/1.x/app1/getGroupSchedule';// ?groupId=945
+    this.getDepartments = '/1.x/app1/getDepartments';
+    this.getFaculties = '/1.x/app1/getFaculties';
+    this.getGroups = '/1.x/app1/getGroups';// ?departmentId=2&facultyId=3&course=3
+    //http://api.grsu.by/1.x/app1/getGroupSchedule?groupId=945&dateStart=24.03.2016&dateEnd=24.04.2016
 };
 GrsuLoader.prototype.Load = function (path, callback) {
     var body = [];

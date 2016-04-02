@@ -1,10 +1,28 @@
 var express = require('express');
 var router = require('./router');
 var mongoose = require('mongoose');
+var schedule = require('node-schedule');
 var tt = require('./timetable_miner');
 var TimetableMiner = new tt.TimetableMiner();
-TimetableMiner.loadAllTimetable(function () {
-    console.log('qwerty');
+var Day = require('./models/day-schedule').DayScheduleSchema;
+var Group = require('./models/group').Group;
+
+/*var j = schedule.scheduleJob('0 0 20 2,8 *', function () {
+    TimetableMiner.loadAllTimetable(function () {
+        console.log('qwerty');
+    });
+});*/
+TimetableMiner.loadAllTimetable(function (timetable) {
+    timetable.groups.forEach(function (group, i, groups) {
+        var gr = Group.buildGroup(group);
+        /*gr.save(function (err, gr, affected) {
+            if (err) {
+                console.log(gr);
+                throw err;
+            }
+        });*/
+    });
+
 });
 var config = require('../config');
 var app = express();
@@ -13,9 +31,22 @@ app.use(express.static(__dirname + '/public'));
 
 app.listen(config.get('port'));
 
-mongoose.connect('mongodb://localhost/test');
+/*mongoose.connect(config.get('mongoose:uri'));
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     console.log('rtyguhi');
+});*/
+var grsuLoader = require('./GrsuLoader');
+var GrsuLoader = new grsuLoader.GrsuLoader();
+GrsuLoader.loadGroupschedule(945, function (timetable) {
+    var d = Day.buildDayScheduleSchema(940, timetable.days[0]);
+    /*Day.findOne({group: '940'}, function (err, day) {
+        console.log(day);
+    });
+    d.save(function (err, user, affected) {
+        if (err) {
+            throw err;
+        }
+    });*/
 });

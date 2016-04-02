@@ -30,7 +30,8 @@
     "kerberos": "0.0.19",
     "mongodb": "^2.1.7",
     "mongodb-core": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "node-schedule": "^1.1.0"
   },
   "devDependencies": {
     "eslint-config-standard": "^5.1.0",
