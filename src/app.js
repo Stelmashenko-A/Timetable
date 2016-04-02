@@ -15,12 +15,12 @@ var Group = require('./models/group').Group;
 TimetableMiner.loadAllTimetable(function (timetable) {
     timetable.groups.forEach(function (group, i, groups) {
         var gr = Group.buildGroup(group);
-        gr.save(function (err, gr, affected) {
+        /*gr.save(function (err, gr, affected) {
             if (err) {
                 console.log(gr);
                 throw err;
             }
-        });
+        });*/
     });
 
 });
@@ -41,12 +41,12 @@ var grsuLoader = require('./GrsuLoader');
 var GrsuLoader = new grsuLoader.GrsuLoader();
 GrsuLoader.loadGroupschedule(945, function (timetable) {
     var d = Day.buildDayScheduleSchema(940, timetable.days[0]);
-    Day.findOne({ group: '940' }, function (err, day) {
+    /*Day.findOne({group: '940'}, function (err, day) {
         console.log(day);
     });
     d.save(function (err, user, affected) {
-        /*if (err) {
+        if (err) {
             throw err;
-        }*/
-    });
+        }
+    });*/
 });

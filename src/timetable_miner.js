@@ -3,6 +3,7 @@ var async = require('async');
 var GrsuLoader = new grsuLoader.GrsuLoader();
 var GrsuSrtucture = require ('./grsu-srtucture').GrsuSrtucture;
 var http = require('http');
+var getRequestParams = require('./lib/request-params');
 
 function TimetableMiner(params) {
 };
@@ -30,27 +31,6 @@ function initUniversitySructure(grsuSrtucture,callback) {
 ], function () {
     callback();
 });
-}
-function RequestParams() {
-    this.department;
-    this.faculty;
-    this.course;
-};
-
-function getRequestParams(grsuSrtucture) {
-    var paramsArray = [];
-    grsuSrtucture.departments.forEach(function (department, i, departments) {
-        grsuSrtucture.faculties.forEach(function (faculty, j, faculties) {
-            grsuSrtucture.courses.forEach(function (course, k, courses) {
-                var params = new RequestParams();
-                params.department = department;
-                params.faculty = faculty;
-                params.course = course;
-                paramsArray.push(params);
-            });
-        });
-    });
-    return paramsArray;
 }
 
 function initGroups(grsuSrtucture,callback) {
