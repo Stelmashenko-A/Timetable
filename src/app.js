@@ -5,6 +5,7 @@ var schedule = require('node-schedule');
 var tt = require('./timetable_miner');
 var TimetableMiner = new tt.TimetableMiner();
 var Day = require('./models/day-schedule').DayScheduleSchema;
+var Group = require('./models/group').Group;
 
 /*var j = schedule.scheduleJob('0 0 20 2,8 *', function () {
     TimetableMiner.loadAllTimetable(function () {
@@ -12,7 +13,16 @@ var Day = require('./models/day-schedule').DayScheduleSchema;
     });
 });*/
 TimetableMiner.loadAllTimetable(function (timetable) {
-    console.log('qwe');
+    timetable.groups.forEach(function (group, i, groups) {
+        var gr = Group.buildGroup(group);
+        gr.save(function (err, gr, affected) {
+            if (err) {
+                console.log(gr);
+                throw err;
+            }
+        });
+    });
+
 });
 var config = require('../config');
 var app = express();
@@ -30,13 +40,13 @@ db.once('open', function () {
 var grsuLoader = require('./GrsuLoader');
 var GrsuLoader = new grsuLoader.GrsuLoader();
 GrsuLoader.loadGroupschedule(945, function (timetable) {
-    var d = Day.buildDayScheduleSchema(949, timetable.days[0]);
-    Day.findOne({group: '949'}, function (err, day) {
+    var d = Day.buildDayScheduleSchema(940, timetable.days[0]);
+    Day.findOne({ group: '940' }, function (err, day) {
         console.log(day);
     });
     d.save(function (err, user, affected) {
-        if (err) {
+        /*if (err) {
             throw err;
-        }
+        }*/
     });
 });

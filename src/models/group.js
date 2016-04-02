@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var Group = new Schema({
     id: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     title: {
         type: String,
@@ -14,7 +15,7 @@ var Group = new Schema({
         type: Number,
         required: true
     },
-    departmen_title: {
+    department_title: {
         type: String,
         required: true
     },
@@ -31,7 +32,7 @@ var Group = new Schema({
         required: true
     }
 });
-Group.statics.buildDayScheduleSchema = function (group, day) {
+Group.statics.buildGroup = function (group) {
     var Model = mongoose.model('Group', Group);
     var groupModel = new Model();
     groupModel.id = group.id;
@@ -40,6 +41,7 @@ Group.statics.buildDayScheduleSchema = function (group, day) {
     groupModel.department_title = group.department.title;
     groupModel.faculty_id = group.faculty.id;
     groupModel.faculty_title = group.faculty.title;
+    groupModel.course = group.course;
     return groupModel;
 };
 

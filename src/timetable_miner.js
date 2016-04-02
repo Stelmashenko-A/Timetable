@@ -81,7 +81,7 @@ TimetableMiner.prototype.loadAllTimetable = function (callback) {
     }
 ], function (params) {
     console.log(grsuSrtucture.groups);
-    callback();
+    callback(grsuSrtucture);
 });
 };
 
