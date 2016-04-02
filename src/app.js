@@ -13,7 +13,7 @@ var Day = require('./models/day-schedule').DayScheduleSchema;
     });
 });*/
 TimetableMiner.loadAllTimetable(function (timetable) {
-    console.log("qwe");
+    console.log('qwe');
 });
 var config = require('../config');
 var app = express();

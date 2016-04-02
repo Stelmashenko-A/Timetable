@@ -35,18 +35,41 @@ function initUniversitySructure(timetable,callback) {
     callback();
 });
 }
+function RequestParams() {
+    this.department;
+    this.faculty;
+    this.course;
+};
+
+function getRequestParams(timetable) {
+    var paramsArray = [];
+    timetable.departments.forEach(function (department, i, departments) {
+        timetable.faculties.forEach(function (faculty, j, faculties) {
+            timetable.courses.forEach(function (course, k, courses) {
+                var params = new RequestParams();
+                params.department = department;
+                params.faculty = faculty;
+                params.course = course;
+                paramsArray.push(params);
+            });
+        });
+    });
+    return paramsArray;
+}
 
 function initGroups(timetable,callback) {
+    var requestParamsArray = getRequestParams(timetable);
     timetable.groups = [];
-    async.each(timetable.departments, function (department, callback) {
-        async.each(timetable.faculties, function (faculty, callback) {
-            async.each(timetable.courses, function (course, callback) {
-                GrsuLoader.loadGroups(department.id, faculty.id, course, function (groups) {
+    async.each(requestParamsArray, function (requestParams, callback) {
+        GrsuLoader.loadGroups(requestParams.department.id, requestParams.faculty.id, requestParams.course, function (groups) {
+                    groups.items.forEach(function (group, k, groups){
+                        group.department = requestParams.department;
+                        group.faculty = requestParams.faculty;
+                        group.course = requestParams.course;
+                    });
                     timetable.groups = timetable.groups.concat(groups.items);                   
                     callback();
                 });
-            }, callback);
-        }, callback);
     }, callback);
 }
 
