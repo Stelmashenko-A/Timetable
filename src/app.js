@@ -4,7 +4,6 @@ var mongoose = require('mongoose');
 var schedule = require('node-schedule');
 var tt = require('./timetable_miner');
 var TimetableMiner = new tt.TimetableMiner();
-var builder = require('./models/day-builder');
 var Day = require('./models/day-schedule').DayScheduleSchema;
 
 /*var j = schedule.scheduleJob('0 0 20 2,8 *', function () {
