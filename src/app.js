@@ -12,8 +12,8 @@ var Group = require('./models/group').Group;
         console.log('qwerty');
     });
 });*/
-TimetableMiner.loadAllTimetable(function (timetable) {
-    timetable.groups.forEach(function (group, i, groups) {
+TimetableMiner.loadGrsuStructure(function (structure) {
+    structure.groups.forEach(function (group, i, groups) {
         var gr = Group.buildGroup(group);
         /*gr.save(function (err, gr, affected) {
             if (err) {
@@ -49,4 +49,10 @@ GrsuLoader.loadGroupschedule(945, function (timetable) {
             throw err;
         }
     });*/
+});
+Group.find({}, function (err, groups) {
+    var f = 0;
+    TimetableMiner.loadSchedule(groups, function (params) {
+        console.log("qwertyuihgfdf");
+    });
 });

@@ -50,7 +50,7 @@ function initGroups(grsuSrtucture,callback) {
     }, callback);
 }
 
-TimetableMiner.prototype.loadAllTimetable = function (callback) {
+TimetableMiner.prototype.loadGrsuStructure = function (callback) {
     var grsuSrtucture = new GrsuSrtucture();
     async.waterfall([
     function (callback) {
@@ -63,6 +63,25 @@ TimetableMiner.prototype.loadAllTimetable = function (callback) {
     console.log(grsuSrtucture.groups);
     callback(grsuSrtucture);
 });
+};
+
+TimetableMiner.prototype.loadSchedule = function (groups, callback) {
+    var scheduleArray = [];
+    var j=0;
+    async.each(groups, function (group, callback1) {
+        GrsuLoader.loadGroupschedule(group.id, function (loadedScheduleArray) {
+           loadedScheduleArray.days.forEach(function (day, i, days) {
+               day.groupId = group.id;
+               console.log(day);
+               scheduleArray.push(day);
+               j++;
+               console.log(j);
+               callback1;
+           });
+       });
+    }, function (params) {
+        callback(scheduleArray);
+    });
 };
 
 exports.TimetableMiner = TimetableMiner;
