@@ -1,0 +1,49 @@
+<!doctype html>
+<html ng-app = "timetableApp">
+
+<head>
+    <title>My Angular App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script>
+        var timetableApp = angular.module("timetableApp", []);
+    timetableApp.controller("timetableController", function ($scope, $http) {
+    $http({
+                    method: 'GET',
+                    url: 'http://localhost:8888/groupSchedule?groupId=945',
+                }).success(function(data) {
+                    $scope.timetable=data.days;
+                });
+    
+});
+    </script>
+</head>
+
+<body ng-controller="timetableController">
+    <table id="timetable">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Подгруппа</th>
+                <th>Дисциплина</th>
+                <th>Преподователь</th>
+                <th>Аудитория</th>
+            </tr>
+        </thead>
+        <tbody>
+            <div ng-repeat="daySchedule in timetable">
+                <div>{{daySchedule.date}}</div>
+                <div data-ng-repeat="lesson in daySchedule.lessons">
+                    <div>{{lesson.timeStart}}-{{lesson.timeEnd}}</div>
+                    <div>{{lesson.subgroup.title}}</div>
+                    <div>{{lesson.type}} {{lesson.title}}</div>
+                    <div>{{lesson.teacher.post}} {{lesson.teacher.fullName}}</div>
+                    <div>{{lesson.room}}, {{lesson.address}}</div>
+                </div>
+            </div>
+        </tbody>
+
+
+</body>
+
+</html>
