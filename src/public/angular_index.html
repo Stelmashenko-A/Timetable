@@ -1,8 +1,9 @@
 <!doctype html>
-<html ng-app = "timetableApp">
+<html ng-app="timetableApp">
 
 <head>
     <title>My Angular App</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script>
         var timetableApp = angular.module("timetableApp", []);
@@ -19,28 +20,26 @@
 </head>
 
 <body ng-controller="timetableController">
-    <table id="timetable">
-        <thead>
-            <tr>
-                <th>Дата</th>
-                <th>Время</th>
-                <th>Подгруппа</th>
-                <th>Дисциплина</th>
-                <th>Преподователь</th>
-                <th>Аудитория</th>
-            </tr>
-        </thead>
-        <tbody>
-            <div ng-repeat="daySchedule in timetable">
-                <div>{{daySchedule.date}}</div>
-                <div data-ng-repeat="lesson in daySchedule.lessons">
-                    <div>{{lesson.timeStart}}-{{lesson.timeEnd}}</div>
-                    <div>{{lesson.subgroup.title}}</div>
-                    <div>{{lesson.type}} {{lesson.title}}</div>
-                    <div>{{lesson.teacher.post}} {{lesson.teacher.fullName}}</div>
-                    <div>{{lesson.room}}, {{lesson.address}}</div>
+    <div class = "timetableHeader">
+        <div class="qwe">Дата</div>
+        <div class="qwe">Время</div>
+        <div class="subgroup">Подгруппа</div>
+        <div class="subject">Дисциплина</div>
+        <div class="teacher">Преподователь</div>
+        <div class="addess">Аудитория</tdivh>
+        </div>
+        <div ng-repeat="daySchedule in timetable">
+            <div class="day">
+                <div class="date">{{daySchedule.date}}</div>
+                <div class="schedule" data-ng-repeat="lesson in daySchedule.lessons">
+                    <div class="field time">{{lesson.timeStart}}-{{lesson.timeEnd}}</div>
+                    <div class="field group">{{lesson.subgroup.title}}</div>
+                    <div class="field lesson">{{lesson.type}} {{lesson.title}}</div>
+                    <div class="field teacher">{{lesson.teacher.post}} {{lesson.teacher.fullName}}</div>
+                    <div class="field address">{{lesson.room}}, {{lesson.address}}</div>
                 </div>
             </div>
+        </div>
         </tbody>
 
 
