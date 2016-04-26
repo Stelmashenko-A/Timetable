@@ -50,9 +50,9 @@ GrsuLoader.loadGroupschedule(945, function (timetable) {
         }
     });*/
 });
-/*Group.find({}, function (err, groups) {
+Group.find({}, function (err, groups) {
     var f = 0;
     TimetableMiner.loadSchedule(groups, function (params) {
-        console.log("qwertyuihgfdf");
+        console.log('qwertyuihgfdf');
     });
-});*/
+});

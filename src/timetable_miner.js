@@ -67,19 +67,24 @@ TimetableMiner.prototype.loadGrsuStructure = function (callback) {
 
 TimetableMiner.prototype.loadSchedule = function (groups, callback) {
     var scheduleArray = [];
-    var j=0;
-    async.each(groups, function (group, callback1) {
-        GrsuLoader.loadGroupschedule(group.id, function (loadedScheduleArray) {
-           loadedScheduleArray.days.forEach(function (day, i, days) {
+    var j = 0;
+    var loadGroupschedule = function (group, callback1) {
+        GrsuLoader.loadGroupschedule(group.id, function (err, loadedScheduleArray) {
+            if (err != null){
+                console.log(err);
+                callback1(err);
+            }else {
+                loadedScheduleArray.days.forEach(function (day, i, days) {
                day.groupId = group.id;
-               console.log(day);
                scheduleArray.push(day);
                j++;
                console.log(j);
                callback1;
            });
-       });
-    }, function (params) {
+            }
+        });
+    };
+    async.each(groups, loadGroupschedule, function (err, response) {
         callback(scheduleArray);
     });
 };
