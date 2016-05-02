@@ -7,3 +7,5 @@
 5. MongoDb
 6. Angular
 7. Job scheduling
+8. Configs with nconf
+9. Balancing the load on the GRSU

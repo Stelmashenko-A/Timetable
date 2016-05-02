@@ -4,7 +4,7 @@ var GrsuLoader = new grsuLoader.GrsuLoader();
 var GrsuSrtucture = require ('./grsu-srtucture').GrsuSrtucture;
 var http = require('http');
 var getRequestParams = require('./lib/request-params');
-
+var count = 0;
 function TimetableMiner(params) {
 };
 
@@ -68,9 +68,19 @@ TimetableMiner.prototype.loadGrsuStructure = function (callback) {
 };
 
 TimetableMiner.prototype.loadSchedule = function (groups, callback) {
+    var start = count * 100;
+    console.log(start);
+    count++;
+    if (count > groups.length / 100){
+        count = 0;
+    }
+    var end = start + 100;
+    if (groups.length < end){
+        end = groups.length;
+    }
+    var groupsForProcessing = groups.slice(start, end - 1);
     var scheduleArray = [];
     var j = 0;
-    
     var loadGroupschedule = function (group, callback1) {
         var prepareLoadedData = function (err, loadedScheduleArray) {
             if (err != null){
@@ -90,7 +100,7 @@ TimetableMiner.prototype.loadSchedule = function (groups, callback) {
         GrsuLoader.loadGroupschedule(group.id, prepareLoadedData);
     };
     console.log(groups.length);
-    async.each(groups, loadGroupschedule, function (err, response) {
+    async.each(groupsForProcessing, loadGroupschedule, function (err, response) {
         callback(scheduleArray);
     });
 };

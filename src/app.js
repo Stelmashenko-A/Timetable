@@ -7,23 +7,22 @@ var TimetableMiner = new tt.TimetableMiner();
 var Day = require('./models/day-schedule').DayScheduleSchema;
 var Group = require('./models/group').Group;
 
-/*var j = schedule.scheduleJob('0 0 20 2,8 *', function () {
-    TimetableMiner.loadAllTimetable(function () {
-        console.log('qwerty');
-    });
-});*/
-TimetableMiner.loadGrsuStructure(function (structure) {
-    structure.groups.forEach(function (group, i, groups) {
+var job = schedule.scheduleJob('0 0 20 2,8 *', function () {
+    var buildGroups = function (group, i, groups) {
         var gr = Group.buildGroup(group);
-        /*gr.save(function (err, gr, affected) {
+        gr.save(function (err, gr, affected) {
             if (err) {
                 console.log(gr);
                 throw err;
             }
-        });*/
-    });
+        });
+    };
+    TimetableMiner.loadGrsuStructure(function (structure) {
+    structure.groups.forEach(buildGroups);
 
 });
+});
+
 var config = require('../config');
 var app = express();
 app.use('/', router);
@@ -50,9 +49,21 @@ GrsuLoader.loadGroupschedule(945, function (err, timetable) {
         }
     });*/
 });
-Group.find({}, function (err, groups) {
-    var f = 0;
+/*Group.find({}, function (err, groups) {
     TimetableMiner.loadSchedule(groups, function (params) {
         console.log('qwertyuihgfdf');
     });
+});*/
+function compareGroups(group1, group2) {
+    return group1.id - group2.id;
+}
+
+var job = schedule.scheduleJob('*/1 * * * *', function () {
+    Group.find({}, function (err, groups) {
+        groups.sort(compareGroups);
+        TimetableMiner.loadSchedule(groups, function (params) {
+        console.log('qwertyuihgfdf');
+    });
+});
+
 });
