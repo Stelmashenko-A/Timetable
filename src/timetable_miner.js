@@ -12,14 +12,14 @@ function initUniversitySructure(grsuSrtucture,callback) {
     async.parallel([
     function (callback) {
         setTimeout(function () {
-            GrsuLoader.loadDepartments(function (departments) {
+            GrsuLoader.loadDepartments(function (err, departments) {
                 grsuSrtucture.departments = departments.items;
             callback();});
         }, 1000);
     },
     function (callback) {
         setTimeout(function () {
-            GrsuLoader.loadFaculties(function (faculties) {
+            GrsuLoader.loadFaculties(function (err, faculties) {
                 grsuSrtucture.faculties = faculties.items;
             callback();});
         }, 1000);
@@ -38,7 +38,7 @@ function initGroups(grsuSrtucture,callback) {
     grsuSrtucture.groups = [];
     async.each(requestParamsArray, function (requestParams, callback) {
         GrsuLoader.loadGroups(requestParams.department.id,
-         requestParams.faculty.id, requestParams.course, function (groups) {
+         requestParams.faculty.id, requestParams.course, function (err, groups) {
                     groups.items.forEach(function (group, k, groups) {
                         group.department = requestParams.department;
                         group.faculty = requestParams.faculty;
@@ -74,16 +74,17 @@ TimetableMiner.prototype.loadSchedule = function (groups, callback) {
                 console.log(err);
                 callback1(err);
             }else {
+                j++;
+                console.log(j);
                 loadedScheduleArray.days.forEach(function (day, i, days) {
                day.groupId = group.id;
                scheduleArray.push(day);
-               j++;
-               console.log(j);
                callback1;
            });
             }
         });
     };
+    console.log(groups.length);
     async.each(groups, loadGroupschedule, function (err, response) {
         callback(scheduleArray);
     });

@@ -39,7 +39,7 @@ db.once('open', function () {
 });*/
 var grsuLoader = require('./GrsuLoader');
 var GrsuLoader = new grsuLoader.GrsuLoader();
-GrsuLoader.loadGroupschedule(945, function (timetable) {
+GrsuLoader.loadGroupschedule(945, function (err, timetable) {
     var d = Day.buildDayScheduleSchema(940, timetable.days[0]);
     /*Day.findOne({group: '940'}, function (err, day) {
         console.log(day);
