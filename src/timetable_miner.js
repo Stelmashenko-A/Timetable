@@ -36,18 +36,20 @@ function initUniversitySructure(grsuSrtucture,callback) {
 function initGroups(grsuSrtucture,callback) {
     var requestParamsArray = getRequestParams(grsuSrtucture);
     grsuSrtucture.groups = [];
-    async.each(requestParamsArray, function (requestParams, callback) {
+    var loadGroups = function (requestParams, callback) {
         GrsuLoader.loadGroups(requestParams.department.id,
-         requestParams.faculty.id, requestParams.course, function (err, groups) {
-                    groups.items.forEach(function (group, k, groups) {
+         requestParams.faculty.id, requestParams.course, function (err, groups) {             
+             var map = function (group, k, groups) {
                         group.department = requestParams.department;
                         group.faculty = requestParams.faculty;
                         group.course = requestParams.course;
-                    });
-                    grsuSrtucture.groups = grsuSrtucture.groups.concat(groups.items);
-                    callback();
-                });
-    }, callback);
+                    };
+             groups.items.forEach(map);
+             grsuSrtucture.groups = grsuSrtucture.groups.concat(groups.items);
+             callback();
+         });
+    };
+    async.each(requestParamsArray, loadGroups, callback);
 }
 
 TimetableMiner.prototype.loadGrsuStructure = function (callback) {
@@ -68,21 +70,24 @@ TimetableMiner.prototype.loadGrsuStructure = function (callback) {
 TimetableMiner.prototype.loadSchedule = function (groups, callback) {
     var scheduleArray = [];
     var j = 0;
+    
     var loadGroupschedule = function (group, callback1) {
-        GrsuLoader.loadGroupschedule(group.id, function (err, loadedScheduleArray) {
+        var prepareLoadedData = function (err, loadedScheduleArray) {
             if (err != null){
                 console.log(err);
                 callback1(err);
             }else {
                 j++;
                 console.log(j);
-                loadedScheduleArray.days.forEach(function (day, i, days) {
-               day.groupId = group.id;
-               scheduleArray.push(day);
-               callback1;
-           });
+                var saveWithId = function (day, i, days) {
+                    day.groupId = group.id;
+                    scheduleArray.push(day);
+                    callback1;
+                };
+                loadedScheduleArray.days.forEach(saveWithId);
             }
-        });
+        };
+        GrsuLoader.loadGroupschedule(group.id, prepareLoadedData);
     };
     console.log(groups.length);
     async.each(groups, loadGroupschedule, function (err, response) {

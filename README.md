@@ -6,3 +6,4 @@
 4. Grsu structure loading
 5. MongoDb
 6. Angular
+7. Job scheduling
