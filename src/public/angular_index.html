@@ -3,7 +3,7 @@
 
 <head>
     <title>My Angular App</title>
-    <link rel="stylesheet" type="text/css" href="stylesheets.css">
+    <link rel="stylesheet" type="text/css" href="angular.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script>
         var timetableApp = angular.module("timetableApp", []);
@@ -26,26 +26,24 @@
                 Расписание на неделю с 02.05.2016
             </caption>
             <tbody>
-               <tr ng-repeat="daySchedule in timetable">
+               <tr class="internaltr" ng-repeat="daySchedule in timetable">
                    <td>
-                       <table>
+                       <table class="internaltable">
                    <tbody>
                        <tr ng-repeat="lesson in daySchedule.lessons track by $index" class="row row-spanned">
-                        <td ng-if="$index==0" rowspan="{{daySchedule.lessons.length}}" class="cell-date"><span class="day">Понедельник</span> <span class="date">{{daySchedule.date}}</span></td>
-                        <td class="cell-time">{{lesson.timeStart}}-{{lesson.timeEnd}}</td>
-                        <td class="cell-subgroup">{{lesson.subgroup.title}}</td>
-                        <td colspan="1" class="cell-discipline">{{lesson.type}} {{lesson.title}}<span class="topic"></span></td>
-                        <td class="cell-staff">{{lesson.teacher.post}} {{lesson.teacher.fullName}}</td>
-                        <td class="cell-auditory">{{lesson.room}}, {{lesson.address}}</td>
+                        <td  class=".internaltd" ng-if="$index==0" rowspan="{{daySchedule.lessons.length}}" class="cell-date"><span class="day">Понедельник</span> <span class="date">{{daySchedule.date}}</span></td>
+                        <td class=".internaltd" class="cell-time">{{lesson.timeStart}}-{{lesson.timeEnd}}</td>
+                        <td  class=".internaltd" class="cell-subgroup">{{lesson.subgroup.title}}</td>
+                        <td  class=".internaltd" colspan="1" class="cell-discipline">{{lesson.type}} {{lesson.title}}<span class="topic"></span></td>
+                        <td  class=".internaltd" class="cell-staff">{{lesson.teacher.post}} {{lesson.teacher.fullName}}</td>
+                        <td class=".internaltd" class="cell-auditory">{{lesson.room}}, {{lesson.address}}</td>
                     </tr>
                        </tbody>
                        </table>
                        </td>
                    </tr>
-                </tbody>
-           
-        </table>
- 
+                </tbody>         
+        </table> 
 </body>
 
 </html>

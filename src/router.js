@@ -9,13 +9,13 @@ router.get('/', function (req, res) {
 });
 
 router.get('/faculties', function (req, res) {
-    GrsuLoader.loadFaculties(function (params) {
+    GrsuLoader.loadFaculties(function (err, params) {
         res.json(params);
     });
 });
 
 router.get('/departments', function (req, res) {
-    GrsuLoader.loadDepartments(function (params) {
+    GrsuLoader.loadDepartments(function (err, params) {
         res.json(params);
     });
 });
