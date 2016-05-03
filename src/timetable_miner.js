@@ -95,13 +95,14 @@ TimetableMiner.prototype.loadSchedule = function (groups, callback) {
                     callback1;
                 };
                 loadedScheduleArray.days.forEach(saveWithId);
+                callback(null, loadedScheduleArray, group.id);
             }
         };
         GrsuLoader.loadGroupschedule(group.id, prepareLoadedData);
     };
     console.log(groups.length);
     async.each(groupsForProcessing, loadGroupschedule, function (err, response) {
-        callback(scheduleArray);
+        callback(err, scheduleArray, -1);
     });
 };
 

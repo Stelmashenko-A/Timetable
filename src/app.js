@@ -58,12 +58,22 @@ function compareGroups(group1, group2) {
     return group1.id - group2.id;
 }
 
-//var job = schedule.scheduleJob('*/1 * * * *', function () {
-  //  Group.find({}, function (err, groups) {
-    //    groups.sort(compareGroups);
-      //  TimetableMiner.loadSchedule(groups, function (params) {
-        //console.log('qwertyuihgfdf');
-    //});
-//});
+var job = schedule.scheduleJob('*/1 * * * *', function () {
+    Group.find({}, function (err, groups) {
+        groups.sort(compareGroups);
+        TimetableMiner.loadSchedule(groups, function (err, day, group) {
 
-//});
+            if (err == null){
+                for (var i = 0; i < day.count; i++){
+                    var d = Day.buildDayScheduleSchema(group, day.days[i]);
+                    d.save(function (err, day, affected) {
+                    if (err) {
+                        throw err;
+                    }
+                });
+                }
+            }
+        });
+    });
+
+});
