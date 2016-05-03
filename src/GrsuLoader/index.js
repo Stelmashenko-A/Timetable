@@ -18,7 +18,12 @@ GrsuLoader.prototype.Load = function (path, callback) {
         res.on('data', function (chunk) {
             body.push(chunk);
         }).on('end', function () {
-            callback(null, JSON.parse(Buffer.concat(body).toString())); // body.toString() -> unexpected comma
+            try{
+                var obj = JSON.parse(Buffer.concat(body).toString());
+                callback(null, obj); // body.toString() -> unexpected comma
+            }catch (err) {
+                callback(err, null);
+            }
         }
             );
     });

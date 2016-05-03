@@ -4,6 +4,9 @@
 <head>
     <title>My Angular App</title>
     <link rel="stylesheet" type="text/css" href="angular.css">
+
+    <script src="http://jasmine.github.io/1.3/lib/jasmine.js"></script>
+    <script src="http://jasmine.github.io/1.3/lib/jasmine-html.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script>
         var timetableApp = angular.module("timetableApp", []);
@@ -15,6 +18,14 @@
                     $scope.timetable=data.days;
                 });
     
+});
+
+describe('timetableApp', function () {
+    var scope,
+    controller;
+    beforeEach(function () {
+        module('timetableApp');
+    });
 });
     </script>
 </head>
