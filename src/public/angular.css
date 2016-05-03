@@ -1,0 +1,10 @@
+table {
+    border-collapse: collapse;
+}
+td {
+    border: 1px solid black;
+}
+.row-separator td {
+    border: medium none;
+    height: 5px;
+}

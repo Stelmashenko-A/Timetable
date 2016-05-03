@@ -21,8 +21,8 @@ router.get('/departments', function (req, res) {
 });
 
 router.get('/groupSchedule', function (req, res) {
-    GrsuLoader.loadGroupschedule(req.query.groupId, function (params) {
-        res.json(params);
+    GrsuLoader.loadGroupschedule(req.query.groupId, function (err, schedule) {
+        res.json(schedule);
     });
 });
 

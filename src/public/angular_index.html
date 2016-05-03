@@ -1,6 +1,6 @@
 <!doctype html>
 <html ng-app="timetableApp">
-//тестирование ангулар-приложений
+
 <head>
     <title>My Angular App</title>
     <link rel="stylesheet" type="text/css" href="stylesheets.css">
@@ -20,29 +20,32 @@
 </head>
 
 <body ng-controller="timetableController">
-    <div class = "timetableHeader">
-        <div class="qwe">Дата</div>
-        <div class="qwe">Время</div>
-        <div class="subgroup">Подгруппа</div>
-        <div class="subject">Дисциплина</div>
-        <div class="teacher">Преподователь</div>
-        <div class="addess">Аудитория</tdivh>
-        </div>
-        <div ng-repeat="daySchedule in timetable">
-            <div class="day">
-                <div class="date">{{daySchedule.date}}</div>
-                <div class="schedule" data-ng-repeat="lesson in daySchedule.lessons">
-                    <div class="field time">{{lesson.timeStart}}-{{lesson.timeEnd}}</div>
-                    <div class="field group">{{lesson.subgroup.title}}</div>
-                    <div class="field lesson">{{lesson.type}} {{lesson.title}}</div>
-                    <div class="field teacher">{{lesson.teacher.post}} {{lesson.teacher.fullName}}</div>
-                    <div class="field address">{{lesson.room}}, {{lesson.address}}</div>
-                </div>
-            </div>
-        </div>
-        </tbody>
 
-
+        <table id="Table">
+            <caption>
+                Расписание на неделю с 02.05.2016
+            </caption>
+            <tbody>
+               <tr ng-repeat="daySchedule in timetable">
+                   <td>
+                       <table>
+                   <tbody>
+                       <tr ng-repeat="lesson in daySchedule.lessons track by $index" class="row row-spanned">
+                        <td ng-if="$index==0" rowspan="{{daySchedule.lessons.length}}" class="cell-date"><span class="day">Понедельник</span> <span class="date">{{daySchedule.date}}</span></td>
+                        <td class="cell-time">{{lesson.timeStart}}-{{lesson.timeEnd}}</td>
+                        <td class="cell-subgroup">{{lesson.subgroup.title}}</td>
+                        <td colspan="1" class="cell-discipline">{{lesson.type}} {{lesson.title}}<span class="topic"></span></td>
+                        <td class="cell-staff">{{lesson.teacher.post}} {{lesson.teacher.fullName}}</td>
+                        <td class="cell-auditory">{{lesson.room}}, {{lesson.address}}</td>
+                    </tr>
+                       </tbody>
+                       </table>
+                       </td>
+                   </tr>
+                </tbody>
+           
+        </table>
+ 
 </body>
 
 </html>

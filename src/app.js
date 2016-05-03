@@ -58,12 +58,12 @@ function compareGroups(group1, group2) {
     return group1.id - group2.id;
 }
 
-var job = schedule.scheduleJob('*/1 * * * *', function () {
-    Group.find({}, function (err, groups) {
-        groups.sort(compareGroups);
-        TimetableMiner.loadSchedule(groups, function (params) {
-        console.log('qwertyuihgfdf');
-    });
-});
+//var job = schedule.scheduleJob('*/1 * * * *', function () {
+  //  Group.find({}, function (err, groups) {
+    //    groups.sort(compareGroups);
+      //  TimetableMiner.loadSchedule(groups, function (params) {
+        //console.log('qwertyuihgfdf');
+    //});
+//});
 
-});
+//});
