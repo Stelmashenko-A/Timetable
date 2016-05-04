@@ -10,7 +10,7 @@ function GrsuLoader(params) {
 };
 GrsuLoader.prototype.Load = function (path, callback) {
     var body = [];
-    http.get({
+    var req = http.get({
         hostname: this.host,
         path: path,
         agent: false
@@ -18,9 +18,17 @@ GrsuLoader.prototype.Load = function (path, callback) {
         res.on('data', function (chunk) {
             body.push(chunk);
         }).on('end', function () {
-            callback(JSON.parse(Buffer.concat(body).toString())); // body.toString() -> unexpected comma
+            try{
+                var obj = JSON.parse(Buffer.concat(body).toString());
+                callback(null, obj); // body.toString() -> unexpected comma
+            }catch (err) {
+                callback(err, null);
+            }
         }
             );
+    });
+    req.on('error', (e) => {
+        callback(e, null);
     });
 };
 GrsuLoader.prototype.loadGroupschedule = function (group, callback) {

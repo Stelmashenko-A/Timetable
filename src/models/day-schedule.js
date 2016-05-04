@@ -19,11 +19,11 @@ var DayScheduleSchema = new Schema({
         required: true,
     }
 });
-DayScheduleSchema.statics.buildDayScheduleSchema = function (group, day) {
+DayScheduleSchema.statics.buildDayScheduleSchema = function (group, daySchedule) {
     var Model = mongoose.model('DayScheduleSchema', DayScheduleSchema);
     var dayScheduleSchema = new Model();
-    dayScheduleSchema.date = day.date;
-    dayScheduleSchema.lessons = Array.from(day.lessons);
+    dayScheduleSchema.date = daySchedule.date;
+    dayScheduleSchema.lessons = daySchedule.lessons;
     dayScheduleSchema.saved = Date.now();
     dayScheduleSchema.group = group;
     return dayScheduleSchema;

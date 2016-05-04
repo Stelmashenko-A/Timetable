@@ -1,0 +1,18 @@
+th, td {
+    border: 1px solid;
+}
+.maintable {
+    border-collapse: collapse;
+}
+.internaltd {
+    border: 1px solid black;
+}
+
+.internaltd{
+    background-color: white
+}
+.row-separator td {
+    border: medium none;
+    height: 5px;
+}
+

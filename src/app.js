@@ -7,23 +7,22 @@ var TimetableMiner = new tt.TimetableMiner();
 var Day = require('./models/day-schedule').DayScheduleSchema;
 var Group = require('./models/group').Group;
 
-/*var j = schedule.scheduleJob('0 0 20 2,8 *', function () {
-    TimetableMiner.loadAllTimetable(function () {
-        console.log('qwerty');
-    });
-});*/
-TimetableMiner.loadAllTimetable(function (timetable) {
-    timetable.groups.forEach(function (group, i, groups) {
+var job = schedule.scheduleJob('0 0 20 2,8 *', function () {
+    var buildGroups = function (group, i, groups) {
         var gr = Group.buildGroup(group);
-        /*gr.save(function (err, gr, affected) {
+        gr.save(function (err, gr, affected) {
             if (err) {
                 console.log(gr);
                 throw err;
             }
-        });*/
-    });
+        });
+    };
+    TimetableMiner.loadGrsuStructure(function (structure) {
+    structure.groups.forEach(buildGroups);
 
 });
+});
+
 var config = require('../config');
 var app = express();
 app.use('/', router);
@@ -39,7 +38,7 @@ db.once('open', function () {
 });*/
 var grsuLoader = require('./GrsuLoader');
 var GrsuLoader = new grsuLoader.GrsuLoader();
-GrsuLoader.loadGroupschedule(945, function (timetable) {
+GrsuLoader.loadGroupschedule(945, function (err, timetable) {
     var d = Day.buildDayScheduleSchema(940, timetable.days[0]);
     /*Day.findOne({group: '940'}, function (err, day) {
         console.log(day);
@@ -49,4 +48,32 @@ GrsuLoader.loadGroupschedule(945, function (timetable) {
             throw err;
         }
     });*/
+});
+/*Group.find({}, function (err, groups) {
+    TimetableMiner.loadSchedule(groups, function (params) {
+        console.log('qwertyuihgfdf');
+    });
+});*/
+function compareGroups(group1, group2) {
+    return group1.id - group2.id;
+}
+
+var job = schedule.scheduleJob('*/1 * * * *', function () {
+    Group.find({}, function (err, groups) {
+        groups.sort(compareGroups);
+        TimetableMiner.loadSchedule(groups, function (err, day, group) {
+
+            if (err == null){
+                for (var i = 0; i < day.count; i++){
+                    var d = Day.buildDayScheduleSchema(group, day.days[i]);
+                    d.save(function (err, day, affected) {
+                    if (err) {
+                        throw err;
+                    }
+                });
+                }
+            }
+        });
+    });
+
 });

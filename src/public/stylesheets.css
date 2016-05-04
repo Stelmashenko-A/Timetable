@@ -1,3 +1,29 @@
 th, td {
     border: 1px solid;
 }
+.timetableHeader{
+    display: inline;
+}
+.day{
+    border: 1px solid #fff;
+        margin:10px;
+        text-align: center;
+}
+
+.date{
+    float: left;
+}
+.schedule{
+    float: auto;
+}
+.field{
+    display: inline;
+}
+.time{
+
+}
+.group{
+
+}
+.lesson{
+}
