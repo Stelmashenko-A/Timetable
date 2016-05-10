@@ -3,6 +3,7 @@ var grsuLoader = require('./GrsuLoader');
 
 var router = express.Router();
 var GrsuLoader = new grsuLoader.GrsuLoader();
+var Day = require('./models/day-schedule').DayScheduleSchema;
 
 router.get('/', function (req, res) {
     res.redirect('/index.html');
@@ -21,9 +22,12 @@ router.get('/departments', function (req, res) {
 });
 
 router.get('/groupSchedule', function (req, res) {
-    GrsuLoader.loadGroupschedule(req.query.groupId, function (err, schedule) {
-        res.json(schedule);
-    });
+    Day.find({group: '947'}, function (err, days) {
+        res.json(days);}
+    );
+    /*GrsuLoader.loadGroupschedule(req.query.groupId, function (err, schedule) {
+       
+    });*/
 });
 
 router.get('/groups', function (req, res) {
